@@ -8,44 +8,28 @@ import java.util.Random;
 
 
 public class Board implements Cloneable {
-    /**
-     * The size of the board
-     */
+    
     public static final int BOARD_SIZE = 4;
     
-    /**
-     * The maximum combination in which the game terminates
-     */
+    
     public static final int TARGET_POINTS = 2048;
     
-    /**
-     * The theoretical minimum win score until the target point is reached
-     */
+    
     public static final int MINIMUM_WIN_SCORE = 18432;
     
-    /**
-     * The score so far
-     */
+   
     private int score=0;
     
-    /**
-     * The board values
-     */
+    
     private int[][] boardArray;
     
-    /**
-     * Random Generator which is used in the creation of random cells
-     */
+    
     private final Random randomGenerator;
     
-    /**
-     * It caches the number of empty cells
-     */
+   
     private Integer cache_emptyCells=null;
     
-    /**
-     * Constructor without arguments. It initializes randomly the Board
-     */
+    
     public Board() {
         boardArray = new int[BOARD_SIZE][BOARD_SIZE];
         randomGenerator = new Random(System.currentTimeMillis());
@@ -55,12 +39,7 @@ public class Board implements Cloneable {
         
     }
     
-    /**
-     * Deep clone
-     * 
-     * @return
-     * @throws CloneNotSupportedException
-     */
+   
     @Override
     public Object clone() throws CloneNotSupportedException {
         Board copy = (Board)super.clone();
@@ -68,38 +47,22 @@ public class Board implements Cloneable {
         return copy;
     }
     
-    /**
-     * Getter for score attribute
-     * 
-     * @return 
-     */
+   
     public int getScore() {
         return score;
     }
     
-    /**
-     * Getter for BoardArray
-     * @return 
-     */
+    
     public int[][] getBoardArray() {
         return clone2dArray(boardArray);
     }
     
-    /**
-     * Getter for RandomGenerator field
-     * 
-     * @return 
-     */
+   
     public Random getRandomGenerator() {
         return randomGenerator;
     }
     
-    /**
-     * Performs one move (up, down, left or right).
-     * 
-     * @param direction
-     * @return 
-     */
+    
     public int move(Direction direction) {    
         int points = 0;
         
@@ -168,11 +131,7 @@ public class Board implements Cloneable {
         return points;
     }
     
-    /**
-     * Returns the Ids of the empty cells. The cells are numbered by row.
-     * 
-     * @return 
-     */
+   
     public List<Integer> getEmptyCellIds() {
         List<Integer> cellList = new ArrayList<>();
         
@@ -187,11 +146,7 @@ public class Board implements Cloneable {
         return cellList;
     }
     
-    /**
-     * Counts the number of empty cells
-     * 
-     * @return 
-     */
+   
     public int getNumberOfEmptyCells() {
         if(cache_emptyCells==null) {
             cache_emptyCells = getEmptyCellIds().size();
@@ -199,12 +154,7 @@ public class Board implements Cloneable {
         return cache_emptyCells;
     }
     
-    /**
-     * Checks if any of the cells in the board has value equal or larger than the
-     * target.
-     * 
-     * @return 
-     */
+    
     public boolean hasWon() {
         if(score<MINIMUM_WIN_SCORE) { //speed optimization
             return false;
@@ -220,12 +170,7 @@ public class Board implements Cloneable {
         return false;
     }
     
-    /**
-     * Checks whether the game is terminated
-     * 
-     * @return 
-     * @throws java.lang.CloneNotSupportedException 
-     */
+  
     public boolean isGameTerminated() throws CloneNotSupportedException {
         boolean terminated=false;
         
@@ -250,13 +195,7 @@ public class Board implements Cloneable {
         return terminated;
     }
     
-    /**
-     * Performs an Up, Right, Down or Left move
-     * 
-     * @param direction
-     * @return 
-     * @throws java.lang.CloneNotSupportedException 
-     */
+   
     public ActionStatus action(Direction direction) throws CloneNotSupportedException {
         ActionStatus result = ActionStatus.CONTINUE;
         
@@ -293,13 +232,7 @@ public class Board implements Cloneable {
         return result;
     }
     
-    /**
-     * Sets the value to an empty cell. 
-     * 
-     * @param i
-     * @param j
-     * @param value 
-     */
+   
     public void setEmptyCell(int i, int j, int value) {
         if(boardArray[i][j]==0) {
             boardArray[i][j]=value;
@@ -321,10 +254,7 @@ public class Board implements Cloneable {
         
         boardArray=rotatedBoard;
     }
-    
-    /**
-     * Rotates the board on the right
-     */
+   
     private void rotateRight() {
         int[][] rotatedBoard = new int[BOARD_SIZE][BOARD_SIZE];
         
@@ -337,9 +267,7 @@ public class Board implements Cloneable {
         boardArray=rotatedBoard;
     }
     
-    /**
-     * Creates a new Random Cell
-     */
+   
     private boolean addRandomCell() {
         List<Integer> emptyCells = getEmptyCellIds();
         
@@ -360,12 +288,7 @@ public class Board implements Cloneable {
         return true;
     }
     
-    /**
-     * Clones a 2D array
-     * 
-     * @param original
-     * @return 
-     */
+   
     private int[][] clone2dArray(int[][] original) { 
         int[][] copy = new int[original.length][];
         for(int i=0;i<original.length;++i) {
@@ -376,12 +299,7 @@ public class Board implements Cloneable {
     
 
     
-    /**
-     * Checks whether the two input boards are same.
-     * 
-     * @param currBoardArray, newBoardArray
-     * @return 
-     */
+  
     public boolean isEqual(int[][] currBoardArray, int[][] newBoardArray) {
 
     	boolean equal = true;
