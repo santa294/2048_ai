@@ -6,11 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-/**
- * The main class of the Game 2048.
- * 
- * @author Vasilis Vryniotis <bbriniotis at datumbox.com>
- */
+
 public class Board implements Cloneable {
     /**
      * The size of the board
